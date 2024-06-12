@@ -1,0 +1,33 @@
+.cart__container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 8px;
+    gap: 24px;
+    padding: 24px;
+
+    .artist {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .session {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .action {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+
+                img {
+                    width: 20px;
+                    height: auto;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+}

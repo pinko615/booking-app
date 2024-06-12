@@ -1,0 +1,29 @@
+.card__container {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .session {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            button {
+                border: none;
+                font-size: 16px;
+                font-weight: 700;
+                background: none;
+                color: rebeccapurple;
+                cursor: pointer;
+            }
+        }
+    }
+}

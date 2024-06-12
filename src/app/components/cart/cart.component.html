@@ -1,0 +1,20 @@
+<div class="cart__container">
+    @if (!cartService.cartItems.length) {
+    <h4>El carrito está vacio</h4>
+    } @else {
+    @for (artist of uniqueArtists; track artist) {
+    <div class="artist">
+        <h4>{{artist}}</h4>
+        @for (session of getSessionsByArtist(artist); track session) {
+        <div class="session">
+            <p>{{ session.date | date: 'dd/MM/yyyy' }}</p>
+            <div class="action">
+                <p>x{{ session.counter }}</p>
+                <img (click)="removeFromCart(session)" src="trash.png" />
+            </div>
+        </div>
+        }
+    </div>
+    }
+    }
+</div>

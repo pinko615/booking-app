@@ -1,0 +1,17 @@
+<div class="card__container">
+    @if (eventNotFound) {
+    <h4>EVENT INFO NOT FOUND</h4>
+    } @else {
+    @for (session of event.sessions; track session;) {
+    <div class="session">
+        <p>Fecha: {{ session.date | date: 'dd/MM/yyyy'}}, Disponibilidad: {{ session.availability }}</p>
+        <div class="counter">
+            <button (click)="removeFromCart(session)">-</button>
+            <p>{{ session.counter }}</p>
+            <button (click)="addToCart(session)">+</button>
+        </div>
+    </div>
+    }
+
+    }
+</div>

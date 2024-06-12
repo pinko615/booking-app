@@ -1,0 +1,16 @@
+.button__container {
+    margin: 0 auto;
+    max-width: 1024px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+
+    button {
+        color: rebeccapurple;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+    }
+}

@@ -1,0 +1,78 @@
+.card__container {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 8px;
+
+    .card__title {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        color: rebeccapurple;
+
+        h3 {
+            cursor: pointer;
+            ;
+        }
+
+        h4 {
+            font-weight: normal;
+            cursor: pointer;
+        }
+    }
+
+    .card__image {
+        img {
+            width: 100%;
+            cursor: pointer;
+            ;
+        }
+    }
+
+    .card__content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        flex: 1;
+
+        span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        p {
+            line-height: 1.4;
+        }
+
+        .card__actions {
+            display: flex;
+            flex-direction: column;
+
+            button {
+                border: none;
+                background-color: rebeccapurple;
+                border-radius: 4px;
+                color: #ffffff;
+                font-weight: 600;
+                padding: 8px 16px;
+                cursor: pointer;
+                transition: all 0.3 ease-in;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 768px) {
+    .card__container {
+        .card__content {
+            p {
+                display: none;
+            }
+        }
+    }
+}
