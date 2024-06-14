@@ -1,11 +1,11 @@
 <div class="cart__container">
-    @if (!cartService.cartItems.length) {
+    @if (!(cartItems$ | async)?.length) {
     <h4>El carrito está vacio</h4>
     } @else {
     @for (artist of uniqueArtists; track artist) {
     <div class="artist">
         <h4>{{artist}}</h4>
-        @for (session of getSessionsByArtist(artist); track session) {
+        @for (session of getSessionsByArtist(artist); track session.date) {
         <div class="session">
             <p>{{ session.date | date: 'dd/MM/yyyy' }}</p>
             <div class="action">

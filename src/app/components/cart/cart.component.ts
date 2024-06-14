@@ -1,45 +1,42 @@
 import { Component } from '@angular/core';
-import { CartService } from '../../services/cart.service';
-import { DatePipe } from '@angular/common';
-import { SessionEvent } from '../../interfaces/event.interface';
+import { AsyncPipe, DatePipe } from '@angular/common';
+import { CartItem, SessionEvent } from '../../interfaces/event.interface';
+import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectCartItems } from '../../store/cart.selectors';
+import { removeFromCart } from '../../store/cart.actions';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, AsyncPipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-
-  constructor(public cartService: CartService) { }
+  cartItems$: Observable<CartItem[]>;
+  constructor(private store: Store) {
+    this.cartItems$ = this.store.select(selectCartItems);
+  }
 
   get uniqueArtists(): string[] {
-    return Array.from(new Set(this.cartService.cartItems.map(item => item.artist)));
+    let artists: string[] = [];
+    this.cartItems$.subscribe(items => {
+      artists = Array.from(new Set(items.map(item => item.artist)));
+    });
+    return artists;
   }
 
   getSessionsByArtist(artist: string): SessionEvent[] {
-    return this.cartService.cartItems.filter(item => item.artist === artist).map(item => item.session);
+    let sessions: SessionEvent[] = [];
+    this.cartItems$.subscribe(items => {
+      sessions = items.filter(item => item.artist === artist).map(item => item.session);
+    });
+    return sessions;
   }
 
   removeFromCart(session: SessionEvent): void {
-    const cartItemIndex = this.cartService.getCartItems().findIndex(item => item.session.date === session.date);
-    if (cartItemIndex !== -1) {
-      const cartItem = this.cartService.getCartItems()[cartItemIndex];
-      const availability = typeof session.availability === 'string' ? parseInt(session.availability, 10) : session.availability;
-      session.availability = availability + 1;
-
-      if (cartItem.quantity > 1) {
-        cartItem.quantity--;
-
-        if (session.counter > 0) {
-          session.counter--;
-        }
-      } else {
-        this.cartService.removeFromCart(session);
-        session.counter = 0;
-      }
-    }
+    const updatedSession = { ...session, counter: session.counter - 1, availability: session.availability + 1 };
+    this.store.dispatch(removeFromCart({ session: updatedSession }));
   }
-
 }

@@ -18,7 +18,7 @@ export interface SingleEvent {
 
 export interface SessionEvent {
     date: string;
-    availability: string | number;
+    availability: number;
     counter: number;
 }
 
@@ -36,3 +36,11 @@ export interface CartItem {
     };
     quantity: number;
 }
+
+export interface CartState {
+    cartItems: CartItem[];
+}
+
+export const initialState: CartState = {
+    cartItems: []
+};
